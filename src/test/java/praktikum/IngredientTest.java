@@ -5,7 +5,7 @@ import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestIngredient {
+public class IngredientTest {
 
     @Mock
     IngredientType type;
