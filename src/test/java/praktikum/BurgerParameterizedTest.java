@@ -14,8 +14,8 @@ import static praktikum.IngredientType.SAUCE;
 @RunWith(Parameterized.class)
 public class BurgerParameterizedTest {
     Burger burger = new Burger();
-    private static final List<Ingredient> ingredients1 = Arrays.asList();
-    private static final List<Ingredient> ingredients2 = Arrays.asList(new Ingredient(FILLING, "Котлета", 250));
+    private static final List<Ingredient> ingredients1 = List.of();
+    private static final List<Ingredient> ingredients2 = List.of(new Ingredient(FILLING, "Котлета", 250));
     private static final List<Ingredient> ingredients3 = Arrays.asList(new Ingredient(SAUCE, "Сырный", 50), new Ingredient(FILLING, "Котлета", 250));
     int expected; // кол. строк бургера: булки - 2, ингредиент - 1, цена и строка между ею и бургером - 2
 
@@ -37,7 +37,6 @@ public class BurgerParameterizedTest {
     public void testGetReceipt() {
         burger.bun = new Bun("Белый итальянский", 100);
         String[] actual = burger.getReceipt().split("\n");
-        System.out.println(burger.getReceipt());
         assertEquals(expected, actual.length);
     }
 }

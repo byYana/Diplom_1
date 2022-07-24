@@ -8,15 +8,13 @@ public class BunTest {
 
     @Test
     public void testGetName() {
-        String expected = "Name";
-        Bun bun = new Bun("Name", 0);
-        assertEquals(expected, bun.getName());
+        Bun bun = new Bun("Белый итальянский", 100);
+        assertEquals("Белый итальянский", bun.getName());
     }
 
     @Test
     public void testGetPrice() {
-        float expected = 10.0F;
-        Bun bun = new Bun("Name", 10);
-        assertEquals(expected, bun.getPrice(), 0.0);
+        Bun bun = new Bun("Белый итальянский", 100);
+        assertEquals(100.0F, bun.getPrice(), 0.0);
     }
 }

@@ -2,48 +2,50 @@ package praktikum;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static praktikum.IngredientType.FILLING;
 import static praktikum.IngredientType.SAUCE;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
+    @Mock
+    Bun bun;
+
+    @InjectMocks
+    Burger burger;
 
     @Test
     public void testSetBuns() {
-        Burger burger = new Burger();
-        Bun bun = new Bun("", 0);
         burger.setBuns(bun);
         assertNotNull(burger.bun);
     }
 
     @Test
     public void testAddIngredient() {
-        Burger burger = new Burger();
-        int expected = 1;   // кол. ингредиентов бургера
-        Ingredient ingredient = new Ingredient(SAUCE, "", 0);
+        Ingredient ingredient = new Ingredient(SAUCE, "Сырный", 50);
         burger.addIngredient(ingredient);
-        assertEquals(expected, burger.ingredients.size());
+        assertEquals(1, burger.ingredients.size()); // сравнение кол. ингредиентов бургера
     }
 
     @Test
     public void testRemoveIngredient() {
-        Burger burger = new Burger();
-        Ingredient ingredient = new Ingredient(SAUCE, "", 0);
-        int expected = 1;   // кол. ингредиентов бургера
+        Ingredient ingredient = new Ingredient(SAUCE, "Сырный", 50);
         burger.ingredients.add(ingredient);
         burger.ingredients.add(ingredient);
         burger.removeIngredient(0);
-        assertEquals(expected, burger.ingredients.size());
+        assertEquals(1, burger.ingredients.size()); // сравнение кол. ингредиентов бургера
     }
 
     @Test
     public void testMoveIngredient() {
-        Burger burger = new Burger();
-        Ingredient ingredient = new Ingredient(SAUCE, "0", 0);
-        Ingredient expected = new Ingredient(SAUCE, "1", 1);
+        Ingredient ingredient = new Ingredient(SAUCE, "Сырный", 50);
+        Ingredient expected = new Ingredient(FILLING, "Котлета", 250);
         burger.ingredients.add(ingredient);
         burger.ingredients.add(expected);
         burger.moveIngredient(0, 1);
@@ -52,14 +54,9 @@ public class BurgerTest {
 
     @Test
     public void testGetPrice() {
-        Burger burger = new Burger();
-        burger.bun = new Bun("", 100);
-        Ingredient ingredient1 = new Ingredient(SAUCE, "1", 100);
-        Ingredient ingredient2 = new Ingredient(SAUCE, "2", 50);
-        burger.ingredients.add(ingredient1);
-        burger.ingredients.add(ingredient2);
-        float expected = 350;   // цена за бургер
-        float actual = burger.getPrice();
-        assertEquals(expected, actual, 0);
+        Mockito.when(bun.getPrice()).thenReturn(100F);
+        burger.ingredients.add(new Ingredient(SAUCE, "Сырный", 50));
+        burger.ingredients.add(new Ingredient(FILLING, "Котлета", 250));
+        assertEquals(500, burger.getPrice(), 0); //сравнение цен за бургер
     }
 }

@@ -1,33 +1,27 @@
 package praktikum;
 
 import org.junit.Test;
-import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
+import static praktikum.IngredientType.SAUCE;
 
 public class IngredientTest {
 
-    @Mock
-    IngredientType type;
-
     @Test
     public void testGetPrice() {
-        float expected = 10.0F;
-        Ingredient ingredient = new Ingredient(type, "", 10);
-        assertEquals(expected, ingredient.getPrice(), 0.0);
+        Ingredient ingredient = new Ingredient(SAUCE, "Сырный", 50);
+        assertEquals(50.0F, ingredient.getPrice(), 0.0);
     }
 
     @Test
     public void testGetName() {
-        String expected = "Name";
-        Ingredient ingredient = new Ingredient(type, "Name", 0);
-        assertEquals(expected, ingredient.getName());
+        Ingredient ingredient = new Ingredient(SAUCE, "Сырный", 50);
+        assertEquals("Сырный", ingredient.getName());
     }
 
     @Test
     public void testGetType() {
-        IngredientType expected = type;
-        Ingredient ingredient = new Ingredient(type, "", 0);
-        assertEquals(expected, ingredient.getType());
+        Ingredient ingredient = new Ingredient(SAUCE, "Сырный", 50);
+        assertEquals(SAUCE, ingredient.getType());
     }
 }
