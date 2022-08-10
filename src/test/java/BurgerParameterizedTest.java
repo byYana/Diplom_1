@@ -1,8 +1,9 @@
-package praktikum;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import praktikum.Bun;
+import praktikum.Burger;
+import praktikum.Ingredient;
 
 import java.util.Arrays;
 import java.util.List;
