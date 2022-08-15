@@ -8,7 +8,7 @@ import praktikum.Ingredient;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static praktikum.IngredientType.FILLING;
 import static praktikum.IngredientType.SAUCE;
 
@@ -37,7 +37,10 @@ public class BurgerParameterizedTest {
     @Test
     public void testGetReceipt() {
         burger.bun = new Bun("Белый итальянский", 100);
-        String[] actual = burger.getReceipt().split("\n");
-        assertEquals(expected, actual.length);
+        String actual = burger.getReceipt();
+        assertTrue(actual.contains(burger.bun.getName()));   // Проверяем, что в бургере нужные булки
+        for (Ingredient i : burger.ingredients) {
+            assertTrue(actual.contains(i.getName()));        // Проверяем, что в бургере нужные ингредиенты
+        }
     }
 }
